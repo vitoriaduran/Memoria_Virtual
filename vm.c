@@ -285,10 +285,11 @@ static int *ler_enderecos(const char *caminho, size_t *total_saida){
     errno = 0;
     while ((tam = getline(&linha, &cap_linha, arq)) != -1){
         num_linha++;
-        //remove \n e \r finais 
-        while (tam > 0 && (linha[tam - 1] == '\n' || linha[tam - 1] == '\r')){
-            linha[--tam] = '\0';
 
+        //remove \n, \r e espacos em branco finais
+        while (tam > 0 && (linha[tam - 1] == '\n' || linha[tam - 1] == '\r' ||linha[tam - 1] == ' '  || linha[tam - 1] == '\t')){
+            
+            linha[--tam] = '\0';
         }
 
         // linha vazia: so aceita no fim do arquivo 
@@ -369,3 +370,76 @@ static int variavel_ambiente_igual(const char *nome, const char *valor){
     return env && strcmp(env, valor) == 0;
 }
 
+//função principal main
+int main(int argc, char **argv)
+{
+    // Validacao de quantidade e tipo dos argumentos da linha de comando 
+    if (argc != 4) {
+        fprintf(stderr, "Erro: numero de argumentos invalido (recebidos %d, esperados 3)\n", argc - 1);
+        mostrar_uso(argv[0]);
+        return 1;
+
+
+    }
+
+    if (interpretar_algoritmo(argv[2], &page_alg) != 0){
+        fprintf(stderr, "Erro: algoritmo de pagina invalido '%s' (use fifo ou lru)\n", argv[2]);
+        mostrar_uso(argv[0]);
+        return 1;
+
+    }
+    if (interpretar_algoritmo(argv[3], &tlb_alg) != 0){
+        fprintf(stderr, "Erro: algoritmo da TLB invalido '%s' (use fifo ou lru)\n", argv[3]);
+        mostrar_uso(argv[0]);
+        return 1;
+
+    }
+
+    // Configuracao de modos via variaveis de ambiente
+    const char *env_frames = getenv("VM_FRAMES");
+    if (env_frames && *env_frames){
+
+        char *fim; long v = strtol(env_frames, &fim, 10);
+        if(*fim || v < 1 || v > MAX_FRAMES){
+            fprintf(stderr, "Erro: VM_FRAMES invalido ('%s'); use 1..%d\n", env_frames, MAX_FRAMES);
+            return 1;
+
+        }
+        num_frames=(int)v;
+    }
+
+    if (variavel_ambiente_igual("VM_TLB", "off")){
+        use_tlb = 0;
+    }
+
+    if (variavel_ambiente_igual("VM_TLB_THREADS", "off")){
+        use_threads = 0;
+    }
+
+
+    //Leitura antecipada dos enderecos e abertura dos arquivos 
+    size_t total_enderecos = 0;
+    int *enderecos = ler_enderecos(argv[1], &total_enderecos);
+    if (!enderecos){
+        return 1;
+    }
+
+    apoio = fopen(BACKING_NAME, "rb");
+    if (!apoio) {
+        fprintf(stderr, "Erro: nao foi possivel abrir '%s': %s\n", BACKING_NAME, strerror(errno));
+        free(enderecos);
+        return 1;
+    }
+    if (fseek(apoio, 0, SEEK_END) != 0 || ftell(apoio) < (long)NUM_PAGES * PAGE_SIZE){
+
+        fprintf(stderr, "Erro: '%s' invalido (esperados %d bytes)\n", BACKING_NAME, NUM_PAGES * PAGE_SIZE);
+        fclose(apoio); free(enderecos);
+        return 1;
+    }
+
+    printf("Validacao OK: %zu enderecos lidos (page_alg=%d, tlb_alg=%d, frames=%d)\n", total_enderecos, page_alg, tlb_alg, num_frames);
+
+    fclose(apoio);
+    free(enderecos);
+    return 0;
+}
