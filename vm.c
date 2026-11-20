@@ -420,6 +420,7 @@ int main(int argc, char **argv)
     //Leitura antecipada dos enderecos e abertura dos arquivos 
     size_t total_enderecos = 0;
     int *enderecos = ler_enderecos(argv[1], &total_enderecos);
+
     if (!enderecos){
         return 1;
     }
@@ -430,16 +431,95 @@ int main(int argc, char **argv)
         free(enderecos);
         return 1;
     }
-    if (fseek(apoio, 0, SEEK_END) != 0 || ftell(apoio) < (long)NUM_PAGES * PAGE_SIZE){
+    if(fseek(apoio, 0, SEEK_END) != 0 || ftell(apoio) < (long)NUM_PAGES * PAGE_SIZE){
 
         fprintf(stderr, "Erro: '%s' invalido (esperados %d bytes)\n", BACKING_NAME, NUM_PAGES * PAGE_SIZE);
         fclose(apoio); free(enderecos);
         return 1;
     }
 
-    printf("Validacao OK: %zu enderecos lidos (page_alg=%d, tlb_alg=%d, frames=%d)\n", total_enderecos, page_alg, tlb_alg, num_frames);
+    //Paginaçao e tradução sem TLB
 
+    FILE *saida = fopen(OUTPUT_NAME, "wb");
+    if (!saida) {
+        fprintf(stderr, "Erro: nao foi possivel criar '%s': %s\n", OUTPUT_NAME, strerror(errno));
+        fclose(apoio); free(enderecos);
+        return 1;
+    }
+
+    //Inicializa tabela de paginas e frames 
+    for (int p = 0; p < NUM_PAGES; p++){
+        page_table[p] = -1;
+    }
+
+    for (int f = 0; f < MAX_FRAMES; f++){
+        frame_page[f] = -1;
+    } 
+
+    long faltas_pagina = 0;
+    long acertos_tlb = 0;
+    int codigo_retorno = 0;
+
+    //loop principal de traducao
+    for (size_t k = 0; k < total_enderecos; k++) {
+
+        int endereco = enderecos[k];
+        int pagina =(endereco >> 8) & 0xFF;
+        int deslocamento = endereco & 0xFF;
+        int frame;
+        clock_tick++;
+
+        // acerto na Tabela de Paginas 
+        if (page_table[pagina] >= 0) {       
+            frame = page_table[pagina];
+            frame_used[frame] = clock_tick;
+        }else {                                    
+            faltas_pagina++;
+
+            //Ainda ha frames livres 
+            if (next_free < num_frames) {           
+                frame = next_free++;
+
+
+            } else {                                
+                frame = escolher_frame_vitima();
+                int pagina_antiga = frame_page[frame];
+                page_table[pagina_antiga] = -1;
+              
+            }
+            if (carregar_pagina(pagina, frame) != 0) {
+                fprintf(stderr, "Erro: falha ao ler a pagina %d de '%s'\n", pagina, BACKING_NAME);
+                codigo_retorno = 1;
+                break;
+
+            }
+
+            page_table[pagina]  = frame;
+            frame_page[frame]   = pagina;
+            frame_loaded[frame] = clock_tick;
+            frame_used[frame]   = clock_tick;
+        }
+
+        int endereco_fisico = frame * PAGE_SIZE + deslocamento;
+        int valor = phys_mem[endereco_fisico];
+        fprintf(saida, "Virtual address: %d TLB: 0 Physical address: %d Value: %d" EOL, endereco, endereco_fisico, valor);
+    }
+
+    if (codigo_retorno == 0){
+
+        fprintf(saida, "Number of Translated Addresses = %zu" EOL, total_enderecos);
+        fprintf(saida, "Page Faults = %ld" EOL, faltas_pagina);
+        fprintf(saida, "Page Fault Rate = %.3f" EOL, (double)faltas_pagina / (double)total_enderecos);
+        fprintf(saida, "TLB Hits = %ld" EOL, acertos_tlb);
+        fprintf(saida, "TLB Hit Rate = %.3f", (double)acertos_tlb / (double)total_enderecos);
+    }
+
+    if (fclose(saida) != 0){
+        fprintf(stderr, "Erro: falha ao gravar '%s': %s\n", OUTPUT_NAME, strerror(errno));
+        codigo_retorno = 1;
+    }
     fclose(apoio);
     free(enderecos);
-    return 0;
+    return codigo_retorno;
+
 }
