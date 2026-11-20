@@ -447,66 +447,118 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    //Inicializa tabela de paginas e frames 
+    // Inicializa tabela de paginas e frames como vazios (-1) 
     for (int p = 0; p < NUM_PAGES; p++){
-        page_table[p] = -1;
+         page_table[p] = -1;
     }
-
     for (int f = 0; f < MAX_FRAMES; f++){
         frame_page[f] = -1;
-    } 
+    }
+
+
+    // inicia o pool de 16 threads da TLB, se ativado 
+    int threads_ativas = use_tlb && use_threads;
+    if (threads_ativas && iniciar_trabalhadores() != 0){
+        fprintf(stderr, "Aviso: falha ao criar threads da TLB; usando busca sequencial\n");
+        parar_todos_trabalhadores();
+        threads_ativas = 0;
+    }
 
     long faltas_pagina = 0;
     long acertos_tlb = 0;
     int codigo_retorno = 0;
 
-    //loop principal de traducao
+    //loop principal de traducao com TLB (threads ou sequencial) + Paginacao 
     for (size_t k = 0; k < total_enderecos; k++) {
 
         int endereco = enderecos[k];
-        int pagina =(endereco >> 8) & 0xFF;
+        int pagina       = (endereco >> 8) & 0xFF;
         int deslocamento = endereco & 0xFF;
-        int frame;
+        int frame, slot = -1;
         clock_tick++;
 
-        // acerto na Tabela de Paginas 
-        if (page_table[pagina] >= 0) {       
-            frame = page_table[pagina];
+        //passo A: Consulta a TLB (com threads ou sequencial) 
+        int indice_tlb = -1;
+        if (use_tlb){
+            indice_tlb = threads_ativas ? buscar_tlb_threads(pagina) : buscar_tlb_sequencial(pagina);
+
+        }
+        //tlb hit
+        if (indice_tlb >= 0){
+
+            acertos_tlb++;
+            slot = indice_tlb;
+            frame = tlb[indice_tlb].frame;
+            tlb[indice_tlb].usado = clock_tick;
             frame_used[frame] = clock_tick;
-        }else {                                    
-            faltas_pagina++;
+        
+         //TLB Miss (ou TLB desligada) 
+        }else{               
+            //Acerto na Tabela de Paginas                         
+            if (page_table[pagina] >= 0) {              
+                frame = page_table[pagina];
+                frame_used[frame] = clock_tick;
 
-            //Ainda ha frames livres 
-            if (next_free < num_frames) {           
-                frame = next_free++;
+            //falta de pagina
+            } else {                                   
+                faltas_pagina++;
 
+                //Ainda ha frames livres 
+                if (next_free < num_frames) {           
+                    frame = next_free++;
+                
+                }
+                //Memoria cheia: substitui pagina vitima 
+                else{                               
+                    frame = escolher_frame_vitima();
+                    int pagina_antiga = frame_page[frame];
+                    page_table[pagina_antiga] = -1;
 
-            } else {                                
-                frame = escolher_frame_vitima();
-                int pagina_antiga = frame_page[frame];
-                page_table[pagina_antiga] = -1;
-              
+                 
+                    pthread_mutex_lock(&mtx);
+                    for (int i = 0; i < TLB_SIZE; i++)
+                        if (tlb[i].valido && tlb[i].pagina == pagina_antiga)
+                            tlb[i].valido = 0;
+                    pthread_mutex_unlock(&mtx);
+                    
+                }
+                if (carregar_pagina(pagina, frame) != 0) {
+                    fprintf(stderr, "Erro: falha ao ler a pagina %d de '%s'\n", pagina, BACKING_NAME);
+                    codigo_retorno = 1;
+                    break;
+                }
+                page_table[pagina]  = frame;
+                frame_page[frame]   = pagina;
+                frame_loaded[frame] = clock_tick;
+                frame_used[frame]   = clock_tick;
             }
-            if (carregar_pagina(pagina, frame) != 0) {
-                fprintf(stderr, "Erro: falha ao ler a pagina %d de '%s'\n", pagina, BACKING_NAME);
-                codigo_retorno = 1;
-                break;
+            //Atualiza a TLB com a nova traducao pagina - frame
+            if (use_tlb) {
 
+                pthread_mutex_lock(&mtx);
+                slot = escolher_slot_tlb();
+                tlb[slot].valido    = 1;
+                tlb[slot].pagina    = pagina;
+                tlb[slot].frame     = frame;
+                tlb[slot].carregado = clock_tick;
+                tlb[slot].usado     = clock_tick;
+                pthread_mutex_unlock(&mtx);
             }
-
-            page_table[pagina]  = frame;
-            frame_page[frame]   = pagina;
-            frame_loaded[frame] = clock_tick;
-            frame_used[frame]   = clock_tick;
         }
 
+        //calcula o endereco fisico e le o byte da memoria fisica 
         int endereco_fisico = frame * PAGE_SIZE + deslocamento;
         int valor = phys_mem[endereco_fisico];
-        fprintf(saida, "Virtual address: %d TLB: 0 Physical address: %d Value: %d" EOL, endereco, endereco_fisico, valor);
+        fprintf(saida, "Virtual address: %d TLB: %d Physical address: %d Value: %d" EOL, endereco, use_tlb ? slot : 0, endereco_fisico, valor);
     }
 
-    if (codigo_retorno == 0){
+    if (threads_ativas){
+        parar_todos_trabalhadores();
+    
+    }
 
+    //Imprime as estatisticas finais 
+    if (codigo_retorno == 0) {
         fprintf(saida, "Number of Translated Addresses = %zu" EOL, total_enderecos);
         fprintf(saida, "Page Faults = %ld" EOL, faltas_pagina);
         fprintf(saida, "Page Fault Rate = %.3f" EOL, (double)faltas_pagina / (double)total_enderecos);
@@ -514,12 +566,13 @@ int main(int argc, char **argv)
         fprintf(saida, "TLB Hit Rate = %.3f", (double)acertos_tlb / (double)total_enderecos);
     }
 
-    if (fclose(saida) != 0){
+    if (fclose(saida) != 0) {
         fprintf(stderr, "Erro: falha ao gravar '%s': %s\n", OUTPUT_NAME, strerror(errno));
         codigo_retorno = 1;
     }
     fclose(apoio);
     free(enderecos);
     return codigo_retorno;
+
 
 }
