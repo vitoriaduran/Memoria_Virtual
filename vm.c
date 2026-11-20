@@ -199,3 +199,44 @@ static int escolher_slot_tlb(void){
     }
     return melhor;
 }
+
+//Le 256 bytes da pagina no disco e grava no frame da memoria fisica
+static int carregar_pagina(int pagina, int frame){
+    if (fseek(apoio, (long)pagina * PAGE_SIZE, SEEK_SET) != 0 ||
+        fread(&phys_mem[frame * PAGE_SIZE], 1, PAGE_SIZE, apoio) != PAGE_SIZE){
+        return -1;
+    }
+
+    return 0;
+}
+
+//Rubrica: Substituicao de pagina com FIFO (10%) ou LRU (15%)
+//escolhe o frame vitima com o menor tempo de carga (FIFO) ou ultimo acesso (LRU) 
+static int escolher_frame_vitima(void){
+    int melhor = 0;
+
+    for (int f = 1; f < num_frames; f++) {
+        long chave;
+
+        if (page_alg == ALG_FIFO) {
+            chave = frame_loaded[f];
+
+        }else{
+
+            chave = frame_used[f];
+        }
+
+        long melhor_chave;
+        if(page_alg == ALG_FIFO){
+            melhor_chave = frame_loaded[melhor];
+        }else{
+
+            melhor_chave = frame_used[melhor];
+        }
+
+        if (chave<melhor_chave){
+            melhor = f;
+        }
+    }
+    return melhor;
+}
