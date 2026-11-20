@@ -62,4 +62,277 @@ Script started on 2026-11-20 11:14:07-03:00 [TERM="xterm-256color" TTY="/dev/pts
 [?2004lFri Nov 20 11:14:10 -03 2026
 [?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
 [?2004lgabyv
-[?2004h]0;gabyv@Vitria: /mnt/c/
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ am[K[Kpws[Kd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git add .
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git commit -m ""a"d"i"c"i"o"n"a"n"d"o" "f"i"n"c"a"[1P"[1P"[1P"[1P"u"n"c"a"o" "e"x"e"c"u"t"a"d"a" "p"o"r" "c"a" [A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cd"a" "u"m"a" "d"a"s" "1"6" "t"h"r"e"a"d"s"[C
+[?2004l[main 56108c9] adicionando funcao executada por cada uma das 16 threads
+ 2 files changed, 53 insertions(+), 1 deletion(-)
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git push orin[Kfi[K[Kgin main
+[?2004lEnumerating objects: 7, done.
+Counting objects:  14% (1/7)Counting objects:  28% (2/7)Counting objects:  42% (3/7)Counting objects:  57% (4/7)Counting objects:  71% (5/7)Counting objects:  85% (6/7)Counting objects: 100% (7/7)Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects:  25% (1/4)Compressing objects:  50% (2/4)Compressing objects:  75% (3/4)Compressing objects: 100% (4/4)Compressing objects: 100% (4/4), done.
+Writing objects:  25% (1/4)Writing objects:  50% (2/4)Writing objects:  75% (3/4)Writing objects: 100% (4/4)Writing objects: 100% (4/4), 1.35 KiB | 26.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas:  33% (1/3)[Kremote: Resolving deltas:  66% (2/3)[Kremote: Resolving deltas: 100% (3/3)[Kremote: Resolving deltas: 100% (3/3), completed with 3 local objects.[K
+To https://github.com/vitoriaduran/Memoria_Virtual
+   43b8503..56108c9  main -> main
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-20 11:15:20-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 11:41:06-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="101" LINES="6"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ gi[K[Kmake 
+[?2004lcc -Wall -Wextra -O2 -std=gnu11  -o vm vm.c -pthread
+[01m[Kvm.c:[m[K In function ‘[01m[Ktrabalhador_tlb[m[K’:
+[01m[Kvm.c:70:37:[m[K [01;31m[Kerror: [m[K‘[01m[Kparar_trabalhado[m[K’ undeclared (first use in this function); did you mean ‘[01m[Kparar_trabalho[m[K’?
+   70 |         while (geracao == vista && ![01;31m[Kparar_trabalhado[m[K){
+      |                                     [01;31m[K^~~~~~~~~~~~~~~~[m[K
+      |                                     [32m[Kparar_trabalho[m[K
+[01m[Kvm.c:70:37:[m[K [01;36m[Knote: [m[Keach undeclared identifier is reported only once for each function it appears in
+[01m[Kvm.c:81:25:[m[K [01;31m[Kerror: [m[K‘[01m[Ktlb[m[K’ undeclared (first use in this function); did you mean ‘[01m[Ktbl[m[K’?
+   81 |         match[indice] = [01;31m[Ktlb[m[K[indice].valido && tlb[indice].pagina == pagina_alvo;
+      |                         [01;31m[K^~~[m[K
+      |                         [32m[Ktbl[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kparar_todos_trabalhadores[m[K’:
+[01m[Kvm.c:123:13:[m[K [01;31m[Kerror: [m[K‘[01m[Ktrabalho_comeocou[m[K’ undeclared (first use in this function); did you mean ‘[01m[Ktrabalho_comecou[m[K’?
+  123 |             [01;31m[Ktrabalho_comeocou[m[K[i] = 0;
+      |             [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+      |             [32m[Ktrabalho_comecou[m[K
+[01m[Kvm.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[Kvm.c:166:5:[m[K [01;31m[Kerror: [m[K‘[01m[Ktlb[m[K’ undeclared (first use in this function); did you mean ‘[01m[Ktbl[m[K’?
+  166 |     [01;31m[Ktlb[m[K[3].valido = 1;
+      |     [01;31m[K^~~[m[K
+      |     [32m[Ktbl[m[K
+[01m[Kvm.c:[m[K At top level:
+[01m[Kvm.c:45:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kapoio[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   45 | static long *[01;35m[Kapoio[m[K = NULL;
+      |              [01;35m[K^~~~~[m[K
+[01m[Kvm.c:44:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kclock_tick[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   44 | static long [01;35m[Kclock_tick[m[K = 0;
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:42:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Ktbl[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   42 | static tbl_entrada [01;35m[Ktbl[m[K[TLB_SIZE];
+      |                    [01;35m[K^~~[m[K
+[01m[Kvm.c:33:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knext_free[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   33 | static int  [01;35m[Knext_free[m[K = 0;
+      |             [01;35m[K^~~~~~~~~[m[K
+[01m[Kvm.c:32:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_used[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   32 | static long [01;35m[Kframe_used[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:31:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_loaded[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   31 | static long [01;35m[Kframe_loaded[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~~~[m[K
+[01m[Kvm.c:30:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_page[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   30 | static int [01;35m[Kframe_page[m[K[MAX_FRAMES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:29:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_table[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   29 | static int [01;35m[Kpage_table[m[K[NUM_PAGES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:28:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Kphys_mem[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   28 | static signed char [01;35m[Kphys_mem[m[K[MAX_FRAMES * PAGE_SIZE];
+      |                    [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:26:24:[m[K [01;35m[Kwarning: [m[K‘[01m[Ktlb_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t page_alg, [01;35m[Ktlb_alg[m[K;
+      |                        [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:26:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t [01;35m[Kpage_alg[m[K, tlb_alg;
+      |              [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:25:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_threads[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   25 | static int  [01;35m[Kuse_threads[m[K = 1;
+      |             [01;35m[K^~~~~~~~~~~[m[K
+[01m[Kvm.c:24:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_tlb[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   24 | static int  [01;35m[Kuse_tlb[m[K = 1;
+      |             [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:23:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knum_frames[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   23 | static int  [01;35m[Knum_frames[m[K = DEFAULT_FRAMES;
+      |             [01;35m[K^~~~~~~~~~[m[K
+make: *** [Makefile:11: vm] Error 1
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [H[2J]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ int main(void) {
+    /* 1. Inicia as 16 threads trabalhadoras */
+    if (iniciar_trabalhadores() != 0) {
+        fprintf(stderr, "Falha ao iniciar threads\n");
+        return 1;
+    }
+
+    /* 2. Preenche manualmente duas entradas na TLB para simular dados */
+    tlb[3].valido = 1;
+[7m    tlb[3].pagina = 42;[27m
+[7m    tlb[3].frame  = 7;[27m
+
+[7m    tlb[15].valido = 1;[27m
+[7m    tlb[15].pagina = 99;[27m
+[7m    tlb[15].frame  = 12;[27m
+
+[7m    /* 3. Testa buscas paralelas nas 16 threads */[27m
+[7m    printf("Buscando pagina 42 (esperado slot 3):  slot = %d\n", buscar_tlb_threads(42));[27m
+[7m    printf("Buscando pagina 99 (esperado slot 15): slot = %d\n", buscar_tlb_threads(99));[27m
+[7m    printf("Buscando pagina 10 (esperado -1):      slot = %d\n", buscar_tlb_threads(10));[27m
+
+[7m    /* 4. Encerra as 16 threads */[27m
+[7m    parar_todos_trabalhadores();[27m
+[7m    printf("Threads encerradas com sucesso!\n");[27m
+[7m    return 0;[27m
+[7m}[27m[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A    tlb[3].pagina = 42;
+    tlb[3].frame  = 7;
+
+    tlb[15].valido = 1;
+    tlb[15].pagina = 99;
+    tlb[15].frame  = 12;
+
+    /* 3. Testa buscas paralelas nas 16 threads */
+    printf("Buscando pagina 42 (esperado slot 3):  slot = %d\n", buscar_tlb_threads(42));
+    printf("Buscando pagina 99 (esperado slot 15): slot = %d\n", buscar_tlb_threads(99));
+    printf("Buscando pagina 10 (esperado -1):      slot = %d\n", buscar_tlb_threads(10));
+
+    /* 4. Encerra as 16 threads */
+    parar_todos_trabalhadores();
+    printf("Threads encerradas com sucesso!\n");
+    return 0;
+}[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make [K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K
+[K[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pexit[K[K[K[K
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make clean
+[?2004lrm -f vm *.o
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ exit[[K
+[?2004lexit
+
+Script done on 2026-11-20 11:45:20-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 11:50:52-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="107" LINES="17"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ g[Kdate
+[?2004lFri Nov 20 11:50:57 -03 2026
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whia[K[Koami
+[?2004lgabyv
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pws[Kd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ da[K[Kmake
+[?2004lcc -Wall -Wextra -O2 -std=gnu11  -o vm vm.c -pthread
+[01m[Kvm.c:[m[K In function ‘[01m[Ktrabalhador_tlb[m[K’:
+[01m[Kvm.c:81:47:[m[K [01;31m[Kerror: [m[K‘[01m[Ktlb[m[K’ undeclared (first use in this function); did you mean ‘[01m[Ktbl[m[K’?
+   81 |         match[indice] = tbl[indice].valido && [01;31m[Ktlb[m[K[indice].pagina == pagina_alvo;
+      |                                               [01;31m[K^~~[m[K
+      |                                               [32m[Ktbl[m[K
+[01m[Kvm.c:81:47:[m[K [01;36m[Knote: [m[Keach undeclared identifier is reported only once for each function it appears in
+[01m[Kvm.c:[m[K At top level:
+[01m[Kvm.c:45:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kapoio[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   45 | static long *[01;35m[Kapoio[m[K = NULL;
+      |              [01;35m[K^~~~~[m[K
+[01m[Kvm.c:44:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kclock_tick[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   44 | static long [01;35m[Kclock_tick[m[K = 0;
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:33:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knext_free[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   33 | static int  [01;35m[Knext_free[m[K = 0;
+      |             [01;35m[K^~~~~~~~~[m[K
+[01m[Kvm.c:32:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_used[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   32 | static long [01;35m[Kframe_used[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:31:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_loaded[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   31 | static long [01;35m[Kframe_loaded[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~~~[m[K
+[01m[Kvm.c:30:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_page[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   30 | static int [01;35m[Kframe_page[m[K[MAX_FRAMES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:29:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_table[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   29 | static int [01;35m[Kpage_table[m[K[NUM_PAGES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:28:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Kphys_mem[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   28 | static signed char [01;35m[Kphys_mem[m[K[MAX_FRAMES * PAGE_SIZE];
+      |                    [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:26:24:[m[K [01;35m[Kwarning: [m[K‘[01m[Ktlb_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t page_alg, [01;35m[Ktlb_alg[m[K;
+      |                        [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:26:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t [01;35m[Kpage_alg[m[K, tlb_alg;
+      |              [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:25:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_threads[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   25 | static int  [01;35m[Kuse_threads[m[K = 1;
+      |             [01;35m[K^~~~~~~~~~~[m[K
+[01m[Kvm.c:24:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_tlb[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   24 | static int  [01;35m[Kuse_tlb[m[K = 1;
+      |             [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:23:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knum_frames[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   23 | static int  [01;35m[Knum_frames[m[K = DEFAULT_FRAMES;
+      |             [01;35m[K^~~~~~~~~~[m[K
+make: *** [Makefile:11: vm] Error 1
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./vm_teste
+[?2004lbash: ./vm_teste: No such file or directory
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./vm
+[?2004lbash: ./vm: No such file or directory
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make clean[[K
+[?2004lrm -f vm *.o
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make
+[?2004lcc -Wall -Wextra -O2 -std=gnu11  -o vm vm.c -pthread
+[01m[Kvm.c:45:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kapoio[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   45 | static long *[01;35m[Kapoio[m[K = NULL;
+      |              [01;35m[K^~~~~[m[K
+[01m[Kvm.c:44:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kclock_tick[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   44 | static long [01;35m[Kclock_tick[m[K = 0;
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:33:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knext_free[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   33 | static int  [01;35m[Knext_free[m[K = 0;
+      |             [01;35m[K^~~~~~~~~[m[K
+[01m[Kvm.c:32:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_used[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   32 | static long [01;35m[Kframe_used[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:31:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_loaded[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   31 | static long [01;35m[Kframe_loaded[m[K[MAX_FRAMES];
+      |             [01;35m[K^~~~~~~~~~~~[m[K
+[01m[Kvm.c:30:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kframe_page[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   30 | static int [01;35m[Kframe_page[m[K[MAX_FRAMES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:29:12:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_table[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   29 | static int [01;35m[Kpage_table[m[K[NUM_PAGES];
+      |            [01;35m[K^~~~~~~~~~[m[K
+[01m[Kvm.c:28:20:[m[K [01;35m[Kwarning: [m[K‘[01m[Kphys_mem[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   28 | static signed char [01;35m[Kphys_mem[m[K[MAX_FRAMES * PAGE_SIZE];
+      |                    [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:26:24:[m[K [01;35m[Kwarning: [m[K‘[01m[Ktlb_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t page_alg, [01;35m[Ktlb_alg[m[K;
+      |                        [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:26:14:[m[K [01;35m[Kwarning: [m[K‘[01m[Kpage_alg[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   26 | static alg_t [01;35m[Kpage_alg[m[K, tlb_alg;
+      |              [01;35m[K^~~~~~~~[m[K
+[01m[Kvm.c:25:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_threads[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   25 | static int  [01;35m[Kuse_threads[m[K = 1;
+      |             [01;35m[K^~~~~~~~~~~[m[K
+[01m[Kvm.c:24:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Kuse_tlb[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   24 | static int  [01;35m[Kuse_tlb[m[K = 1;
+      |             [01;35m[K^~~~~~~[m[K
+[01m[Kvm.c:23:13:[m[K [01;35m[Kwarning: [m[K‘[01m[Knum_frames[m[K’ defined but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gcc/Warning-Options.html#index-Wno-unused-variable-Wunused-variable]8;;[m[K]
+   23 | static int  [01;35m[Knum_frames[m[K = DEFAULT_FRAMES;
+      |             [01;35m[K^~~~~~~~~~[m[K
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./cm[K[Kvm_teste
+[?2004lbash: ./vm_teste: No such file or directory
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./vm
+[?2004lBuscando pagina 42 (esperado slot 3):  slot = 3
+Buscando pagina 99 (esperado slot 15): slot = 15
+Buscando pagina 10 (esperado -1):      slot = -1
+Threads encerradas com sucesso!
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ r[Kexit
+[?2004lexit
+
+Script done on 2026-11-20 11:56:39-03:00 [COMMAND_EXIT_CODE="0"]

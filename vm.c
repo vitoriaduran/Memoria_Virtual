@@ -38,7 +38,8 @@ typedef struct {
     int frame;
     long carregado;
     long usado;
-}tbl_entrada tbl[TLB_SIZE];
+}tbl_entrada;
+static tbl_entrada tbl[TLB_SIZE];
 
 static long clock_tick = 0;
 static long *apoio = NULL;
@@ -63,31 +64,91 @@ static void *trabalhador_tlb(void *arg) {
     int indice = *(int *)arg;
     long vista = 0;
 
-    pthread_mutex_lock(&trava);
+    pthread_mutex_lock(&mtx);
     for (;;) {
         // Aguarda a thread principal disparar uma nova busca 
-        while (geracao == vista && !parar_trabalhadores){
+        while (geracao == vista && !parar_trabalho){
 
-            pthread_cond_wait(&cv_iniciar, &trava);
+            pthread_cond_wait(&cv_comecou, &mtx);
         }
-        if (parar_trabalhadores){
+        if (parar_trabalho){
             break;
         
         }
 
         vista = geracao;
         //Cada thread verifica EXCLUSIVAMENTE a sua propria entrada na TLB 
-        corresponde[indice] = tlb[indice].valido && tlb[indice].pagina == pagina_alvo;
+        match[indice] = tbl[indice].valido && tbl[indice].pagina == pagina_alvo;
 
         //A ultima thread a terminar sinaliza a thread principal 
-        pendentes --;
-        if (pendentes == 0){
-            pthread_cond_signal(&cv_concluido);
+        pendente --;
+        if (pendente == 0){
+            pthread_cond_signal(&cv_terminou);
         
         }
     }
-    pthread_mutex_unlock(&trava);
+    pthread_mutex_unlock(&mtx);
     return NULL;
 }
 
 
+//cria e inicializa as 16 threads trabalhadoras antes do loop de endereços
+static int iniciar_trabalhadores(void) {
+    for (int i = 0; i < TLB_SIZE; i++){
+
+        trabalho_idx[i] = i;
+        if (pthread_create(&trabalhos[i], NULL, trabalhador_tlb, &trabalho_idx[i]) != 0){
+            return -1;
+
+        }
+
+        trabalho_comecou[i] = 1;
+    }
+
+    return 0;
+}
+
+//encerra todas as threads de forma limpa ao final da execucao
+static void parar_todos_trabalhadores(void) {
+
+    pthread_mutex_lock(&mtx);
+    parar_trabalho = 1;
+    pthread_cond_broadcast(&cv_comecou);
+    pthread_mutex_unlock(&mtx);
+
+    for (int i = 0; i < TLB_SIZE; i++){
+        if (trabalho_comecou[i]) {
+
+            pthread_join(trabalhos[i], NULL);
+            trabalho_comecou[i] = 0;
+        }
+    }
+
+}
+
+//dispara uma busca paralela nas 16 entradas da TLB e retorna o slot ou -1 
+static int buscar_tlb_threads(int pagina) {
+    int encontrado = -1;
+
+    pthread_mutex_lock(&mtx);
+    pagina_alvo = pagina;
+    pendente = TLB_SIZE;
+    geracao++;
+    pthread_cond_broadcast(&cv_comecou);
+
+    while (pendente > 0){
+        pthread_cond_wait(&cv_terminou, &mtx);
+
+    }
+
+    for (int i = 0; i < TLB_SIZE; i++){
+
+        if (match[i]){
+             encontrado = i; 
+             break;
+        }
+    }
+    
+    pthread_mutex_unlock(&mtx);
+    return encontrado;
+}
