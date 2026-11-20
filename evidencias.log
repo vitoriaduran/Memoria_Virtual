@@ -3,4 +3,40 @@ Script started on 2026-11-20 06:24:59-03:00 [TERM="xterm-256color" TTY="/dev/pts
 [?2004lFri Nov 20 06:25:06 -03 2026
 [?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
 [?2004lgabyv
-[?2004h]0;gabyv@Vitria
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pwd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ cd[K[Kgit as[Kdd .
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git commit -a[Km C[K""a"d"i"c"i"o"n"a"n"d"o" "m"a"k"[1P"[1P"[1P"M"a"k"e"f"i"l"e" "e" "[1P"[1P"e" "m"v","[1P"[1P"[1P"p"a"s"t"a"s" "d"o" "p"[1P"[1P"[1P"a" "u"n"[1P"[1P"i"m"p"l"e"m"e"n"t"a"ç"ã"o"[C
+[?2004l[main (root-commit) cb10b55] adicionando Makefile e pastas da implementação
+ 5 files changed, 23 insertions(+)
+ create mode 100644 BACKING_STORE.bin
+ create mode 100644 Makefile
+ create mode 100644 README.md
+ create mode 100644 evidencias.log
+ create mode 100644 vm.c
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git commi[K[K[K[K[Kpsu[K[Kusg[Kh origin main
+[?2004lremote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/vitoriaduran/Memoria_Virtual/'
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"[27m [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cgit config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe" [A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K"
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git push origin main
+[?2004lEnumerating objects: 6, done.
+Counting objects:  16% (1/6)Counting objects:  33% (2/6)Counting objects:  50% (3/6)Counting objects:  66% (4/6)Counting objects:  83% (5/6)Counting objects: 100% (6/6)Counting objects: 100% (6/6), done.
+Delta compression using up to 12 threads
+Compressing objects:  20% (1/5)Compressing objects:  40% (2/5)Compressing objects:  60% (3/5)Compressing objects:  80% (4/5)Compressing objects: 100% (5/5)Compressing objects: 100% (5/5), done.
+Writing objects:  16% (1/6)Writing objects:  33% (2/6)Writing objects:  50% (3/6)Writing objects:  66% (4/6)Writing objects:  83% (5/6)Writing objects: 100% (6/6)Writing objects: 100% (6/6), 32.98 KiB | 432.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To https://github.com/vitoriaduran/Memoria_Virtual
+ * [new branch]      main -> main
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ exit
+[?2004lexit
+
+Script done on 2026-11-20 06:29:49-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 07:57:40-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="201" LINES="18"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ dTE[K[K[KA[Kdate
+[?2004lFri Nov 20 07:57:49 -03 2026
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
+[?2004lgabyv
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pwd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git add . [K[K.
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_V
