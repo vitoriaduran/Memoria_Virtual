@@ -240,3 +240,132 @@ static int escolher_frame_vitima(void){
     }
     return melhor;
 }
+
+
+//tratamento de erros
+//validaçao de argumentos da cli e do arquivo de endereços
+static void mostrar_uso(const char *prog){
+    fprintf(stderr, "Uso: %s <arquivo_de_enderecos> <fifo|lru> <fifo|lru>\n" "2o argumento: algoritmo de substituicao de pagina\n" "3o argumento: algoritmo de substituicao da TLB\n", prog);
+}
+
+static int interpretar_algoritmo(const char *s, alg_t *saida){
+
+    if (strcmp(s, "fifo") == 0){
+        *saida = ALG_FIFO; return 0;
+    }
+    if(strcmp(s, "lru")  == 0){
+         *saida = ALG_LRU;
+           return 0;
+     }
+
+    return -1;
+}
+
+// Le e valida todos os enderecos antes de iniciar a simulacao
+static int *ler_enderecos(const char *caminho, size_t *total_saida){
+    FILE *arq = fopen(caminho, "rb");
+    if (!arq){
+        fprintf(stderr, "Erro: nao foi possivel abrir o arquivo de enderecos '%s': %s\n", caminho, strerror(errno));
+        return NULL;
+    }
+
+    size_t capacidade = 1024, total = 0;
+    int *vetor = malloc(capacidade * sizeof *vetor);
+    if (!vetor){
+        fclose(arq); fprintf(stderr, "Erro: memoria insuficiente\n"); 
+        return NULL;
+    }
+
+    char *linha = NULL;
+    size_t cap_linha = 0;
+    ssize_t tam;
+    size_t num_linha = 0, linhas_vazias = 0;
+    int valido = 1;
+
+    errno = 0;
+    while ((tam = getline(&linha, &cap_linha, arq)) != -1){
+        num_linha++;
+        //remove \n e \r finais 
+        while (tam > 0 && (linha[tam - 1] == '\n' || linha[tam - 1] == '\r')){
+            linha[--tam] = '\0';
+
+        }
+
+        // linha vazia: so aceita no fim do arquivo 
+        if (tam == 0){                 
+            linhas_vazias++;
+            continue;
+        }
+          // se havia linha vazia no meio dos dados 
+        if(linhas_vazias > 0){      
+
+            fprintf(stderr, "Erro: linha %zu: linha vazia no meio do arquivo de enderecos\n", num_linha - 1);
+            valido = 0; 
+            break;
+        }
+        // aceita apenas digitos decimais sem sinal
+        long long valor = 0;
+        for (ssize_t k = 0; k < tam; k++) {
+            if (!isdigit((unsigned char)linha[k])) {
+                fprintf(stderr, "Erro: linha %zu: formato invalido ('%s'); esperado um inteiro decimal sem sinal\n",num_linha, linha);
+                valido = 0;
+                 break;
+            }
+            valor = valor * 10 + (linha[k] - '0');
+            if (valor > ADDR_MAX){ 
+                break;
+
+            }
+        }
+        if(!valido){
+            break;
+        } 
+
+        if (valor > ADDR_MAX){
+            fprintf(stderr, "Erro: linha %zu: endereco fora do intervalo 0..%d\n", num_linha, ADDR_MAX);
+            valido = 0;
+            break;
+        }
+
+        if (total == capacidade) {
+            capacidade *= 2;
+            int *tmp = realloc(vetor, capacidade * sizeof *vetor);
+            if (!tmp){
+                fprintf(stderr, "Erro: memoria insuficiente\n");
+                valido = 0;
+                break;
+            }
+            vetor = tmp;
+        }
+        vetor[total++] = (int)valor;
+    }
+    if (valido && ferror(arq)) {
+        fprintf(stderr, "Erro: falha ao ler '%s': %s\n", caminho, strerror(errno));
+        valido = 0;
+    }
+
+
+    if(valido && total == 0) {
+        fprintf(stderr, "Erro: arquivo de enderecos '%s' esta vazio\n", caminho);
+        valido = 0;
+
+    }
+    free(linha);
+    fclose(arq);
+
+    if (!valido){
+        free(vetor);
+        return NULL;
+    }
+
+    *total_saida = total;
+    return vetor;
+}
+
+
+static int variavel_ambiente_igual(const char *nome, const char *valor){
+    const char *env = getenv(nome);
+
+    return env && strcmp(env, valor) == 0;
+}
+
