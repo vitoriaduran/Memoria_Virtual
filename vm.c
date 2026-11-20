@@ -38,11 +38,11 @@ typedef struct {
     int frame;
     long carregado;
     long usado;
-}tbl_entrada;
-static tbl_entrada tbl[TLB_SIZE];
+}tlb_entrada;
+static tlb_entrada tlb[TLB_SIZE];
 
 static long clock_tick = 0;
-static long *apoio = NULL;
+static FILE *apoio = NULL;
 
 
 //pool de threads: uma thread permanente por entrada tlb
@@ -78,7 +78,7 @@ static void *trabalhador_tlb(void *arg) {
 
         vista = geracao;
         //Cada thread verifica EXCLUSIVAMENTE a sua propria entrada na TLB 
-        match[indice] = tbl[indice].valido && tbl[indice].pagina == pagina_alvo;
+        match[indice] = tlb[indice].valido && tlb[indice].pagina == pagina_alvo;
 
         //A ultima thread a terminar sinaliza a thread principal 
         pendente --;
@@ -151,4 +151,51 @@ static int buscar_tlb_threads(int pagina) {
     
     pthread_mutex_unlock(&mtx);
     return encontrado;
+}
+
+
+//Rubrica: fluxo tlb sem threads
+//busca sequencial na tlb usada quando VM_TLB_THREADS=off
+static int buscar_tlb_sequencial(int pagina){
+    for (int i = 0; i < TLB_SIZE; i++){
+        if (tlb[i].valido && tlb[i].pagina == pagina){
+             return i;
+        }
+    }
+    return -1;
+}
+
+//substituicao da tlb por fifo ou lru
+//escolhe o slot livre (0..15) ou aplica FIFO/LRU para substituir uma entrada
+static int escolher_slot_tlb(void){
+    int melhor = -1;
+     //primeiro, preenche slots livres 0..15 
+    for (int i = 0; i < TLB_SIZE; i++)  {    
+        if (!tlb[i].valido){
+            return i;
+        }
+    }
+
+    for (int i = 0; i < TLB_SIZE; i++) {
+        long chave;
+        if (tlb_alg == ALG_FIFO) {
+            chave = tlb[i].carregado;
+        }else {
+            chave = tlb[i].usado;
+        }
+
+        long melhor_chave;
+        if (melhor < 0) {
+            melhor_chave = 0;
+        }else if(tlb_alg == ALG_FIFO){
+             melhor_chave = tlb[melhor].carregado;
+        }else{
+            melhor_chave = tlb[melhor].usado;
+        }
+
+        if (melhor < 0 || chave < melhor_chave){
+            melhor = i;
+        }
+    }
+    return melhor;
 }
