@@ -58,7 +58,36 @@ static int pagina_alvo = 0;
 static int parar_trabalho = 0;
 
 
+//funçao executada por cada uma das 16 threads da tlb
+static void *trabalhador_tlb(void *arg) {
+    int indice = *(int *)arg;
+    long vista = 0;
 
+    pthread_mutex_lock(&trava);
+    for (;;) {
+        // Aguarda a thread principal disparar uma nova busca 
+        while (geracao == vista && !parar_trabalhadores){
 
+            pthread_cond_wait(&cv_iniciar, &trava);
+        }
+        if (parar_trabalhadores){
+            break;
+        
+        }
+
+        vista = geracao;
+        //Cada thread verifica EXCLUSIVAMENTE a sua propria entrada na TLB 
+        corresponde[indice] = tlb[indice].valido && tlb[indice].pagina == pagina_alvo;
+
+        //A ultima thread a terminar sinaliza a thread principal 
+        pendentes --;
+        if (pendentes == 0){
+            pthread_cond_signal(&cv_concluido);
+        
+        }
+    }
+    pthread_mutex_unlock(&trava);
+    return NULL;
+}
 
 

@@ -39,4 +39,27 @@ Script started on 2026-11-20 07:57:40-03:00 [TERM="xterm-256color" TTY="/dev/pts
 [?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pwd
 [?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
 [?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git add . [K[K.
-[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_V
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git commit -m ""[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgit add.[K .
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git commit -,[Km ""a"d"i"c"i"o"n"a"n"d"o" "e"s"t"r"u"t"u"r"a"s" "e" "e"[1P"d"e"f"i"n"e"[C
+[?2004l[main 43b8503] adicionando estruturas e define
+ 2 files changed, 101 insertions(+), 1 deletion(-)
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git push ro[K[Korigin main
+[?2004lEnumerating objects: 7, done.
+Counting objects:  14% (1/7)Counting objects:  28% (2/7)Counting objects:  42% (3/7)Counting objects:  57% (4/7)Counting objects:  71% (5/7)Counting objects:  85% (6/7)Counting objects: 100% (7/7)Counting objects: 100% (7/7), done.
+Delta compression using up to 12 threads
+Compressing objects:  25% (1/4)Compressing objects:  50% (2/4)Compressing objects:  75% (3/4)Compressing objects: 100% (4/4)Compressing objects: 100% (4/4), done.
+Writing objects:  25% (1/4)Writing objects:  50% (2/4)Writing objects:  75% (3/4)Writing objects: 100% (4/4)Writing objects: 100% (4/4), 2.06 KiB | 32.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas:   0% (0/1)[Kremote: Resolving deltas: 100% (1/1)[Kremote: Resolving deltas: 100% (1/1), completed with 1 local object.[K
+To https://github.com/vitoriaduran/Memoria_Virtual
+   cb10b55..43b8503  main -> main
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ exir[Kt
+[?2004lexit
+
+Script done on 2026-11-20 08:00:32-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-20 11:14:07-03:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="107" LINES="20"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ date
+[?2004lFri Nov 20 11:14:10 -03 2026
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
+[?2004lgabyv
+[?2004h]0;gabyv@Vitria: /mnt/c/
