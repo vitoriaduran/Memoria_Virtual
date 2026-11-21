@@ -100,9 +100,13 @@ VM_TLB_THREADS=off ./vm address.txt lru fifo          # TLB sem threads
 ## Evidências
 ```sh
 script -a evidencias.log
-sh evidencias.sh
+date
+whoami
+pwd
 exit
 ```
  
 ## Estrutura
-`vm.c` · `Makefile` · `run_tests.sh` · `evidencias.sh` · `README.md` · `evidencias.log` · relatório (PDF)
+`vm.c` · `Makefile`· `evidencias.log` · `README.md` · `evidencias.log` · relatório (PDF)
+
+📄 **Relatório do Projeto (PDF):** [Acessar vgjda2.pdf](./vgjda2.pdf)
