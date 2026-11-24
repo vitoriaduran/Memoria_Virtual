@@ -2986,3 +2986,117 @@ TLB Hit Rate = 0.055[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_
 [?2004lexit
 
 Script done on 2026-11-20 17:32:53-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-21 07:39:08-03:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="201" LINES="8"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ date
+[?2004lSat Nov 21 07:39:10 -03 2026
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
+[?2004lgabyv
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pe[Kwd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mprintf "0\n65535\n65535\n256\n0\n" > teste_limite.txt[27m
+[7mVM_FRAMES=1 ./vm teste_limite.txt lru lru && cat correct.txt[27m[Aprintf "0\n65535\n65535\n256\n0\n" > teste_limite.txt
+VM_FRAMES=1 ./vm teste_limite.txt lru lru && cat correct.txt
+[?2004lVirtual address: 0 TLB: 0 Physical address: 0 Value: 0
+Virtual address: 65535 TLB: 0 Physical address: 255 Value: -1
+Virtual address: 65535 TLB: 0 Physical address: 255 Value: -1
+Virtual address: 256 TLB: 0 Physical address: 0 Value: 0
+Virtual address: 0 TLB: 0 Physical address: 0 Value: 0
+Number of Translated Addresses = 5
+Page Faults = 4
+Page Fault Rate = 0.800
+TLB Hits = 1
+TLB Hit Rate = 0.200[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mprintf "100\n65536\n200\n" > teste_invalido_faixa.txt[27m
+[7m./vm teste_invalido_faixa.txt lru fifo[27m[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ printf "100\n65536\n200\n" > teste_invalido_faixa.txt
+./vm teste_invalido_faixa.txt lru fifo
+[?2004lErro: linha 2: endereco fora do intervalo 0..65535
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mprintf "100\n-5\n200\n" > teste_invalido_formato.txt[27m
+[7m./vm teste_invalido_formato.txt lru fifo[27m[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ printf "100\n-5\n200\n" > teste_invalido_formato.txt
+./vm teste_invalido_formato.txt lru fifo
+[?2004lErro: linha 2: formato invalido ('-5'); esperado um inteiro decimal sem sinal
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mprintf "100\n\n200\n" > teste_invalido_vazio.txt[27m
+[7m./vm teste_invalido_vazio.txt lru fifo[27m[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ printf "100\n\n200\n" > teste_invalido_vazio.txt
+./vm teste_invalido_vazio.txt lru fifo
+[?2004lErro: linha 2: linha vazia no meio do arquivo de enderecos
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7m./vm teste_limite.txt invalido fifo[27m./vm teste_limite.txt invalido fifo
+[?2004lErro: algoritmo de pagina invalido 'invalido' (use fifo ou lru)
+Uso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+2o argumento: algoritmo de substituicao de pagina
+3o argumento: algoritmo de substituicao da TLB
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [K]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mrm -f teste_limite.txt teste_invalido_faixa.txt teste_invalido_formato.txt teste_invalido_vazio.txt gabarito.txt[27m
+[7m./vm addresses.txt lru fifo[27m
+[7mexit[27m[A[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ rm -f teste_limite.txt teste_invalido_faixa.txt teste_invalido_formato.txt teste_invalido_vazio.txt gabarito.txt
+./vm addresses.txt lru fifo
+exit
+[?2004lexit
+
+Script done on 2026-11-21 07:45:21-03:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-11-24 18:03:51-03:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="201" LINES="25"]
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./[K[Kmake [K[K[K[K[Kdate
+[?2004lTue Nov 24 18:04:05 -03 2026
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ whoami
+[?2004lgabyv
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ pwd
+[?2004l/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make clean
+[?2004lrm -f vm *.o
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ make
+[?2004lcc -Wall -Wextra -O2 -std=gnu11  -o vm vm.c -pthread
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ ./vm lru [7maddress.txt lru fifo [27maddress.txt lru fifo 
+[?2004lErro: numero de argumentos invalido (recebidos 4, esperados 3)
+Uso: ./vm <arquivo_de_enderecos> <fifo|lru> <fifo|lru>
+2o argumento: algoritmo de substituicao de pagina
+3o argumento: algoritmo de substituicao da TLB
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7maddress.txt lru fifo [27maddress.txt lru fifo [C[1@e[1@s
+[?2004laddresses.txt: command not found
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit add vm.c Makefile[27mgit add vm.c Makefile
+[?2004l[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit status[27mgit status
+[?2004lOn branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	[32mmodified:   Makefile[m
+	[32mmodified:   vm.c[m
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	[31mmodified:   evidencias.log[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31mBACKING_STORE.bin[m
+	[31maddresses.txt[m
+	[31mvm[m
+
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit commit -m "Atualiza vm.c e Makefile"[27mgit commit -m "Atualiza vm.c e Makefile"
+[?2004l[main af5b877] Atualiza vm.c e Makefile
+ 2 files changed, 45 insertions(+), 16 deletions(-)
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit push origin main[27mgit commit -m "Atualiza vm.c e Makefile"[20Ppush origin main[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kgitpus[K[K[K push pri[K[K[Korigin main
+[?2004lTo https://github.com/vitoriaduran/Memoria_Virtual
+ [31m! [rejected]       [m main -> main (fetch first)
+[31merror: failed to push some refs to 'https://github.com/vitoriaduran/Memoria_Virtual'
+[m[33mhint: Updates were rejected because the remote contains work that you do not[m
+[33mhint: have locally. This is usually caused by another repository pushing to[m
+[33mhint: the same ref. If you want to integrate the remote changes, use[m
+[33mhint: 'git pull' before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit pull --rebase origin main[27mgit pull --rebase origin main
+[?2004lerror: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit pull --rebase origin main[27m
+[7mgit push origin main[27m[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git pull --rebase origin main
+git push origin main
+[?2004lerror: cannot pull with rebase: You have unstaged changes.
+error: Please commit or stash them.
+To https://github.com/vitoriaduran/Memoria_Virtual
+ [31m! [rejected]       [m main -> main (fetch first)
+[31merror: failed to push some refs to 'https://github.com/vitoriaduran/Memoria_Virtual'
+[m[33mhint: Updates were rejected because the remote contains work that you do not[m
+[33mhint: have locally. This is usually caused by another repository pushing to[m
+[33mhint: the same ref. If you want to integrate the remote changes, use[m
+[33mhint: 'git pull' before pushing again.[m
+[33mhint: See the 'Note about fast-forwards' in 'git push --help' for details.[m
+[?2004h]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ [7mgit pull --rebase origin main[27m
+[7mgit push origin main[27m[A]0;gabyv@Vitria: /mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[01;32mgabyv@Vitria[00m:[01;34m/mnt/c/Users/gabyv/vgjda2/Memoria_Virtual[00m$ git pull --rebase origin main
+[1Pgit push origin mai[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[K[K[K[K[K[K[K[K
