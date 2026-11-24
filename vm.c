@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <pthread.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -370,9 +371,41 @@ static int variavel_ambiente_igual(const char *nome, const char *valor){
     return env && strcmp(env, valor) == 0;
 }
 
+//abre o BACKING_STORE.bin: diretorio atual, pasta do arquivo de enderecos ou pasta do executavel
+static FILE *abrir_apoio(const char *arq_enderecos, const char *prog){
+    FILE *f = fopen(BACKING_NAME, "rb");
+    if (f){
+        return f;
+    }
+    int erro = errno;
+    const char *origens[2] = { arq_enderecos, prog };
+    for (int i = 0; i < 2; i++){
+        const char *barra = strrchr(origens[i], '/');
+        if (!barra){
+            continue;
+        }
+        char caminho[4096];
+        size_t dir = (size_t)(barra - origens[i]);
+        if (dir + 1 + sizeof(BACKING_NAME) > sizeof caminho){
+            continue;
+        }
+        memcpy(caminho, origens[i], dir);
+        caminho[dir] = '/';
+        memcpy(caminho + dir + 1, BACKING_NAME, sizeof(BACKING_NAME));
+        f = fopen(caminho, "rb");
+        if (f){
+            return f;
+        }
+    }
+    errno = erro;
+    return NULL;
+}
+
 //função principal main
 int main(int argc, char **argv)
 {
+    signal(SIGPIPE, SIG_IGN);
+
     // Validacao de quantidade e tipo dos argumentos da linha de comando 
     if (argc != 4) {
         fprintf(stderr, "Erro: numero de argumentos invalido (recebidos %d, esperados 3)\n", argc - 1);
@@ -425,7 +458,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    apoio = fopen(BACKING_NAME, "rb");
+    apoio = abrir_apoio(argv[1], argv[0]);
     if (!apoio) {
         fprintf(stderr, "Erro: nao foi possivel abrir '%s': %s\n", BACKING_NAME, strerror(errno));
         free(enderecos);
@@ -440,12 +473,8 @@ int main(int argc, char **argv)
 
     //Paginaçao e tradução sem TLB
 
+    //correct.txt e opcional: se nao for possivel cria-lo (ex.: pasta somente leitura), a saida padrao continua normalmente
     FILE *saida = fopen(OUTPUT_NAME, "wb");
-    if (!saida) {
-        fprintf(stderr, "Erro: nao foi possivel criar '%s': %s\n", OUTPUT_NAME, strerror(errno));
-        fclose(apoio); free(enderecos);
-        return 1;
-    }
 
     // Inicializa tabela de paginas e frames como vazios (-1) 
     for (int p = 0; p < NUM_PAGES; p++){
@@ -549,7 +578,11 @@ int main(int argc, char **argv)
         //calcula o endereco fisico e le o byte da memoria fisica 
         int endereco_fisico = frame * PAGE_SIZE + deslocamento;
         int valor = phys_mem[endereco_fisico];
-        fprintf(saida, "Virtual address: %d TLB: %d Physical address: %d Value: %d" EOL, endereco, use_tlb ? slot : 0, endereco_fisico, valor);
+        if (saida){
+            fprintf(saida, "Virtual address: %d TLB: %d Physical address: %d Value: %d" EOL, endereco, use_tlb ? slot : 0, endereco_fisico, valor);
+        }
+        //saida padrao: SOMENTE as linhas de traducao (uma por endereco), sem estatisticas e sem outras mensagens
+        printf("Virtual address: %d TLB: %d Physical address: %d Value: %d\n", endereco, use_tlb ? slot : 0, endereco_fisico, valor);
     }
 
     if (threads_ativas){
@@ -558,7 +591,7 @@ int main(int argc, char **argv)
     }
 
     //Imprime as estatisticas finais 
-    if (codigo_retorno == 0) {
+    if (saida && codigo_retorno == 0) {
         fprintf(saida, "Number of Translated Addresses = %zu" EOL, total_enderecos);
         fprintf(saida, "Page Faults = %ld" EOL, faltas_pagina);
         fprintf(saida, "Page Fault Rate = %.3f" EOL, (double)faltas_pagina / (double)total_enderecos);
@@ -566,9 +599,8 @@ int main(int argc, char **argv)
         fprintf(saida, "TLB Hit Rate = %.3f", (double)acertos_tlb / (double)total_enderecos);
     }
 
-    if (fclose(saida) != 0) {
-        fprintf(stderr, "Erro: falha ao gravar '%s': %s\n", OUTPUT_NAME, strerror(errno));
-        codigo_retorno = 1;
+    if (saida){
+        fclose(saida);
     }
     fclose(apoio);
     free(enderecos);
